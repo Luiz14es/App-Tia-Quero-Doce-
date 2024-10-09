@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     textAlign: 'center',
+    fontFamily: 'Lobster',
   },
   card: {
     flex: 1,
@@ -52,7 +53,8 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 5,
     alignItems: "center",
-    width: "90%"
+    width: "90%",
+    marginLeft: 5,
   },
   imagem: {
     width: 100,
@@ -61,15 +63,17 @@ const styles = StyleSheet.create({
   },
   info: {
     marginLeft: 5,
-    flexShrink: 1
+    flexShrink: 1,
   },
   nome: {
     fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 5
+    fontWeight: "800",
+    marginBottom: 5,
+    fontFamily: 'Lobster',
   },
   descricao: {
-    fontSize: 16,
-    flexWrap: "wrap"
+    fontSize: 14,
+    flexWrap: "wrap",
+    fontFamily: 'Lobster',
   }
 });

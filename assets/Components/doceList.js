@@ -51,13 +51,13 @@ export const data = [
     },
     {
         id: "7",
-        nome : "Bolo de massa de chocolate e recheio debrigadeiro preto",
+        nome : "Bolo de aniversário",
         image: boloPersonalizadoDeFlamengo,
         descricao: "Bolo de massa de chocolate e recheio de brigadeiro preto ,decoração biscoito e granulados "
     },
     {
         id: "8",
-        nome : "Bolo de masssa branca e recheio de brigadeiro branco e preto",
+        nome : "Bolo de aniversário",
         image: boloPersonalidoDePrincesa,
         descricao: "Massa branca, recheio de brigadeiro branco e preto, decoração infanti"
     },

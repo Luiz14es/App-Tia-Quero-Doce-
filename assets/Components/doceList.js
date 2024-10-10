@@ -1,5 +1,3 @@
-import { ImageProps } from "react-native";
-
 
 const barcaDeDoces = require("../img/BarcaDeDoces.jpeg");
 const boloBrancoDeMorango = require("../img/BoloBrancoDeMorango.jpeg");

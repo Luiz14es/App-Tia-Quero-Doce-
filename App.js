@@ -51,13 +51,22 @@ function HomeScreen() {
 
       <View style={styles.infoConfeiteira}>
         <Text style={styles.title2}>Conheça nossa confeiteira</Text>
-        <Text style={styles.nome}>Tia Quero Doce</Text>
 
-        {linhas.map((linha, index) => (
-          <Text key={index} style={[styles.texto, { marginLeft: (index % 2 === 0) ? 10 : 50 }]}>
-            {linha.trim() + (index < linhas.length - 1 ? "," : "")}
-          </Text>
-        ))}
+        <View style={styles.secaoTexto1}>
+          <Image 
+          source={require("../tiaQueroDoce/assets/img/ConfeiteiraIlustracao.png")}
+          style={styles.confeiteiraIlustracao1}
+          />
+
+          <View style={styles.divTexto}>
+            {linhas.map((linha, index) => (
+            <Text key={index} style={[styles.texto, { marginLeft: (index % 2 === 0) ? 5 : 25 }]}>
+              {linha.trim() + (index < linhas.length - 1 ? "," : ".")}
+            </Text>
+            ))}
+          </View>
+        </View>
+        
       </View>
     </View>
   );

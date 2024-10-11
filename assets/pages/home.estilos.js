@@ -19,25 +19,30 @@ export const styles = StyleSheet.create({
     }, 
     infoConfeiteira: {
         flex: 1,
-        padding: 5,
-        marginLeft: 5,
-        alignItems: "center"
+        alignItems: "center",
+        width: "90%"
     },
     title2: {
       fontFamily: "Lobster",
       fontSize: 18,
-      color: "#ff6c50"
-    },
-    nome: {
       color: "#ff6c50",
-      fontFamily: "Lobster",
-      fontSize: 16,
-      marginBottom: 5,
-      fontWeight: "bold"
+      marginBottom:10
+    },
+    secaoTexto1: {
+      flexDirection: "row",
+      alignItems: "flex-start",
+      marginLeft: 5
+    },
+    confeiteiraIlustracao1: {
+      height: 150,
+      width: 150,
+      resizeMode: "contain",
+    },
+    divTexto: {
+      flexShrink: 1
     },
     texto: {
       color: "#ff6c50",
       fontFamily: "Lobster",
-      textAlign: 'center',
     }
   });

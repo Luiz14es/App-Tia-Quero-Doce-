@@ -15,60 +15,64 @@ export const data = [
         id: "1",
         nome : "Barca de chocolate",
         image: barcaDeDoces,
-        descricao: "7 barcas de chocolate de 500gs com decoração de guloseimas"
+        descricao: "7 barcas de chocolate de 500gs com decoração de guloseimas",
+        tipo: "barca",
+        preco: 15
     },
     {
         id: "2",
         nome : "Bolo de morango",
         image: boloBrancoDeMorango,
-        descricao: "massa branca ,recheio de creme de baunilha, decoração de chantilly e morangos"
+        descricao: "massa branca ,recheio de creme de baunilha, decoração de chantilly e morangos",
+        tipo: "bolo",
+        preco: 20
     },
     {
         id: "3",
-        nome : "Barca de chocolate",
+        nome : "Bolo de chocolate",
         image: boloDeChocolateBranco,
-        descricao: "Bolo de massa branca, recheio de brigadeiro branco, decoração com kitkat e chantilly"
+        descricao: "Bolo de massa branca, recheio de brigadeiro branco, decoração com kitkat e chantilly",
+        tipo: "bolo",
+        preco: 20
     },
     {
         id: "4",
         nome : "Bolo de churros",
         image: boloDeChurros,
-        descricao: "Bolo de churros, massa branca recheio de doce de leite e decoração churros e doce de leite "
+        descricao: "Bolo de churros, massa branca recheio de doce de leite e decoração churros e doce de leite ",
+        tipo: "bolo",
+        preco: 20
     },
     {
         id: "5",
-        nome : "Bolo de chocolate",
-        image: boloDePetalasBrancas,
-        descricao: "Bolo massa de chocolate, recheio de brigadeiro preto e recheio de doce de leite crocante"
+        nome : "Bolo de guloseimas",
+        image: boloDivididoEmQuartoDoces,
+        descricao: "Bolo massa branca ,recheio de brigadeiro,decoração com biscoito e guloseimas",
+        tipo: "bolo",
+        preco: 20
     },
     {
         id: "6",
-        nome : "Bolo de guloseimas",
-        image: boloDivididoEmQuartoDoces,
-        descricao: "Bolo massa branca ,recheio de brigadeiro,decoração com biscoito e guloseimas"
+        nome : "Bolo de aniversário",
+        image: boloPersonalidoDePrincesa,
+        descricao: "Massa branca, recheio de brigadeiro branco e preto, decoração infanti",
+        tipo: "bolo",
+        preco: 20
     },
     {
         id: "7",
-        nome : "Bolo de aniversário",
-        image: boloPersonalizadoDeFlamengo,
-        descricao: "Bolo de massa de chocolate e recheio de brigadeiro preto ,decoração biscoito e granulados "
+        nome : "Cupcake de chocolate",
+        image: cupCakeRosa,
+        descricao: "Massa de chocolate, recheio de brigadeiro, decorados com pasta americana ",
+        tipo: "cupcake",
+        preco: 10
     },
     {
         id: "8",
-        nome : "Bolo de aniversário",
-        image: boloPersonalidoDePrincesa,
-        descricao: "Massa branca, recheio de brigadeiro branco e preto, decoração infanti"
-    },
-    {
-        id: "9",
-        nome : "Cupcake de chocolate",
-        image: cupCakeRosa,
-        descricao: "Massa de chocolate, recheio de brigadeiro, decorados com pasta americana "
-    },
-    {
-        id: "10",
         nome : "Ovo de colher",
         image: ovoDaPascoaDeBrigadeiro,
-        descricao: "ovo de colher 50grs, recheio de brigadeiro"
+        descricao: "ovo de colher 50grs, recheio de brigadeiro",
+        tipo: "ovo",
+        preco: 12
     }
 ]

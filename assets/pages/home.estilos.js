@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
       alignItems: "flex-start"
     },
     cardHome: {
-      flex: 1,
+      height: "100%"
     },
     boloCard: {
       height: 50,

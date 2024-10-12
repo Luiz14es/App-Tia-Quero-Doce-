@@ -45,7 +45,7 @@ function HomeScreen() {
   const linhas = texto.split(",");
 
   const slideAnim = useRef(new Animated.Value(300)).current;
-  const cardAnim = useRef(new Animated.Value(300)).current;
+  const cardAnim = useRef(new Animated.Value(500)).current;
 
   useEffect(() => {
     Animated.parallel([

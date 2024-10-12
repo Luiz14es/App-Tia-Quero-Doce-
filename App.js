@@ -96,6 +96,8 @@ function HomeScreen() {
             </TouchableOpacity>
           </View>
       </Animated.View>
+
+      <Text>oi</Text>
     </View>
   );
 }

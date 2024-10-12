@@ -1,50 +1,81 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      backgroundColor: '#fef7da',
-    },
-    title: {
-      fontSize: 25,
-      color: '#ff6c50',
-      margin: 20,
-      textAlign: 'center',
-      fontFamily: 'Lobster',
-    },
-    card: {
-      flexDirection: "row",
-      backgroundColor: "#fff",
-      borderRadius: 10,
-      padding: 10,
-      margin: 10,
-      shadowColor: '#000',
-      shadowOpacity: 0.1,
-      shadowOffset: { width: 0, height: 2 },
-      shadowRadius: 5,
-      alignItems: "center",
-      width: "90%",
-    },
-    imagem: {
-      width: 100,
-      height: "100%",
-      borderRadius: 10,
-      marginRight: 10
-    },
-    info: {
-      marginLeft: 5,
-      flexShrink: 1,
-    },
-    nome: {
-      fontSize: 22,
-      marginBottom: 5,
-      fontFamily: 'Lobster',
-    },
-    descricao: {
-      fontSize: 18,
-      flexWrap: "wrap",
-      fontFamily: 'Lobster',
-    }
-  });
-  
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fef7da',
+  },
+  title: {
+    fontSize: 24,
+    fontFamily: 'Lobster',  
+    marginBottom: 20,
+    color: "#ff6c50",
+  },
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    marginBottom: 20,
+    overflow: 'hidden',
+    flexDirection: 'row',
+    padding: 10,
+  },
+  imagem: {
+    width: 80,
+    height: 80,
+    marginRight: 10,
+  },
+  info: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  nome: {
+    fontSize: 22,
+    fontFamily: 'Roboto',
+    fontWeight: "bold",
+    marginBottom: 5
+  },
+  descricao: {
+    fontSize: 18,
+    color: "#666",
+    fontFamily: 'Lobster',  
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContainer: {
+    width: '80%',
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  modalImage: {
+    width: 150,
+    height: 150,
+    marginBottom: 10,
+  },
+  modalDescription: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  modalPrice: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#ff6c50',
+  },
+  modalServing: {
+    fontSize: 16,
+    color: '#333',
+    marginBottom: 10,
+  },
+});

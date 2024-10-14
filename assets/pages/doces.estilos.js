@@ -3,27 +3,27 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 10,
     backgroundColor: '#fef7da',
   },
   title: {
     fontSize: 24,
     fontFamily: 'Lobster',  
-    marginBottom: 20,
+    margin: 24,
     color: "#ff6c50",
   },
   card: {
     backgroundColor: '#fff',
     borderRadius: 10,
-    marginBottom: 20,
+    marginBottom: 24,
     overflow: 'hidden',
     flexDirection: 'row',
-    padding: 10,
   },
   imagem: {
     width: 80,
     height: 80,
     marginRight: 10,
+    borderRadius: 10
   },
   info: {
     flex: 1,
@@ -33,12 +33,12 @@ export const styles = StyleSheet.create({
     fontSize: 22,
     fontFamily: 'Roboto',
     fontWeight: "bold",
-    marginBottom: 5
+    marginBottom: 5,
   },
   descricao: {
     fontSize: 18,
     color: "#666",
-    fontFamily: 'Lobster',  
+    fontFamily: 'Roboto'
   },
   modalOverlay: {
     flex: 1,

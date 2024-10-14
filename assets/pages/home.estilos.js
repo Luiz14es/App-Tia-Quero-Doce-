@@ -10,22 +10,21 @@ export const styles = StyleSheet.create({
       alignItems: "center"
     },
     title: {
-      margin: 20,
+      margin: 24,
       color: "#ff6c50",
-      fontSize: 25,
+      fontSize: 30,
       fontFamily: 'Lobster',  
     },
     logo: {
-      height: 280,
-      width: 280,
-      marginBottom: 20,
+      height: 300,
+      width: 300,
+      margin: 24,
       resizeMode: "contain"
     }, 
     infoConfeiteira: {
-        flex: 1,
         alignItems: "flex-start",
         flexDirection: "column",
-        margin: 10
+        margin: 24
     },
     title2: {
       fontFamily: "Lobster",
@@ -35,26 +34,12 @@ export const styles = StyleSheet.create({
     },
     texto: {
       color: "#ff6c50",
-      fontFamily: "Lobster",
-      fontSize: 18
-    }
-    ,cardAnimado: {
-      width: "85%",
-      height: 400,
-      backgroundColor: "#fff",
-      borderRadius: 10,
-      alignItems: "flex-start"
+      fontSize: 18,
+      fontFamily: 'Roboto'
     },
-    cardHome: {
-      height: "100%"
-    },
-    boloCard: {
-      height: 50,
-      width: 50,
-    },
-    link: {
-      color: "#ff6c50",
-      fontFamily: "Lobster",
-      fontSize: 18
+    view2: {
+      margin: 24,
+      alignSelf: 'stretch',
+      alignItems: 'center'
     }
   });

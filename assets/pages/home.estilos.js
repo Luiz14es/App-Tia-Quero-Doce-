@@ -16,8 +16,8 @@ export const styles = StyleSheet.create({
       fontFamily: 'Lobster',  
     },
     logo: {
-      height: 300,
-      width: 300,
+      height: 280,
+      width: 280,
       margin: 24,
       resizeMode: "contain"
     }, 
@@ -30,16 +30,29 @@ export const styles = StyleSheet.create({
       fontFamily: "Lobster",
       fontSize: 23,
       color: "#ff6c50",
-      marginBottom: 18
+      marginBottom: 8
     },
     texto: {
       color: "#ff6c50",
       fontSize: 18,
       fontFamily: 'Roboto'
     },
-    view2: {
+    infoNegocio: {
+      alignItems: "flex-start",
+      flexDirection: "column",
       margin: 24,
-      alignSelf: 'stretch',
-      alignItems: 'center'
+    },
+    negocioTitle: {
+      fontFamily: "Lobster",
+      fontSize: 23,
+      color: "#ff6c50",
+      marginRight: 50
+    },
+    viewIcons: {
+      flexDirection: "row",
+      justifyContent: "center"
+    },
+    icones: {
+      margin: 24
     }
   });

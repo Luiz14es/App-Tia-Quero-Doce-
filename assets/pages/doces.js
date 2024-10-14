@@ -35,7 +35,7 @@ export default function Doces() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Veja nossos doces!</Text>
+      <Text style={styles.title}>Veja alguns dos nossos doces!</Text>
       <FlatList
         data={data}
         renderItem={renderItem}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, Image, Modal, TouchableOpacity, Button } from 'react-native';
+import { View, Text, FlatList, Image, Modal, TouchableOpacity, Linking } from 'react-native';
 import { data } from '../Components/doceList';
 import { styles } from './doces.estilos';
 
@@ -16,6 +16,14 @@ export default function Doces() {
     setModalVisible(false);
     setSelectedItem(null);
   };
+
+  const enviarMensagem = (item) => {
+    const telefone = "+5521995040236";
+    const mensagem = `Olá, tenho interesse no ${item.nome} (${item.descricao})`;
+    const url = `whatsapp://send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`;
+
+    Linking.openURL(url).catch(() => alert("O WhatsApp não esta instalado"))
+  }
 
   const renderItem = ({ item }) => {
     return (
@@ -54,9 +62,14 @@ export default function Doces() {
               <Text style={styles.modalTitle}>{selectedItem.nome}</Text>
               <Image source={selectedItem.image} style={styles.modalImage} />
               <Text style={styles.modalDescription}>{selectedItem.descricao}</Text>
-              <Text style={styles.modalPrice}>Preço: R$50</Text>
-              <Text style={styles.modalServing}>Serve: 10 pessoas</Text>
-              <Button title="Fechar" onPress={closeModal} />
+              <Text style={styles.modalText}>{selectedItem.preco}</Text>
+
+              <TouchableOpacity
+                style={styles.whatsappBotao}
+                onPress={() => enviarMensagem(selectedItem)}
+              >
+                <Text style={styles.whatsappBotaoTexto}>Tenho interesse nesse doce</Text>
+              </TouchableOpacity>
             </View>
           </TouchableOpacity>
         </Modal>

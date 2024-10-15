@@ -56,26 +56,38 @@ export const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10,
+    margin: 10,
+    fontFamily: 'Roboto',
   },
   modalImage: {
-    width: 150,
-    height: 150,
-    marginBottom: 10,
+    width: 200,
+    height: 200,
+    margin: 10,
+    borderRadius: 10,
   },
   modalDescription: {
     fontSize: 16,
     textAlign: 'center',
     marginBottom: 10,
+    color: "#666",
+    fontFamily: 'Roboto'
   },
-  modalPrice: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#ff6c50',
-  },
-  modalServing: {
+  modalText: {
     fontSize: 16,
-    color: '#333',
+    textAlign: 'center',
     marginBottom: 10,
+    color: "#666",
+    fontFamily: 'Roboto'
   },
+  whatsappBotao: {
+    padding: 15,
+    margin: 15,
+    borderRadius: 10, 
+    backgroundColor: "#ff6c50"
+  },
+  whatsappBotaoTexto: {
+    color: '#fff',
+    fontSize: 18,
+    textAlign: 'center',
+  }
 });

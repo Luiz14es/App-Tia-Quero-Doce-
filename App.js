@@ -96,7 +96,3 @@ function HomeScreen() {
   );
 }
 
-///Tia Quero Doce é sinônimo de sabor e carinho. Diretamente de Madureira, nossa confeiteira começou com uma paixão por doces caseiros, conquistando o paladar de quem provava suas criações. Com uma tradição que une afeto e dedicação, ela traz à mesa doces que são mais que sobremesas, são memórias doces que ficam para sempre.
-{/* const abrirFacebook = () => {
-    Linking.openURL("https://www.facebook.com/share/fVr6xyh5SEoH7t65/?mibextid=qi2Omg");
-  };*/}

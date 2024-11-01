@@ -5,7 +5,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 
-
 import Doces from './assets/pages/doces';
 import Formulario from './assets/pages/formulario';
 import Icons from './assets/Components/Icons';
@@ -71,7 +70,7 @@ function HomeScreen() {
         <Animated.View style={[styles.containerAnimado, { transform: [{ translateY: slideAnim }] }]}>
           <Text style={styles.title}>Tia Quero Doce!</Text>
           <Image
-            source={require("../tiaQueroDoce/assets/img/ConfeiteiraIlustracao.png")}
+            source={require("./assets/img/ConfeiteiraIlustracao.png")}
             style={styles.logo} />
 
           <View style={styles.infoConfeiteira}>

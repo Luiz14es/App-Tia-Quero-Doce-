@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, Image, Modal, TouchableOpacity, Linking } from 'react-native';
+import { View, Text, FlatList, Image, Modal, TouchableOpacity} from 'react-native';
 import { data } from '../Components/doceList';
 import { abrirWhatsApp } from "../Components/numero";
 import { styles } from './doces.estilos';
@@ -60,7 +60,7 @@ export default function Doces() {
 
               <TouchableOpacity
                 style={styles.whatsappBotao}
-                onPress={() => enviarMensagem(selectedItem)}
+                onPress={() => abrirWhatsApp(selectedItem)}
               >
                 <Text style={styles.whatsappBotaoTexto}>Tenho interesse nesse doce</Text>
               </TouchableOpacity>

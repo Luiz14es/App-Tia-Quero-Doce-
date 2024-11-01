@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 
+
 import Doces from './assets/pages/doces';
 import Formulario from './assets/pages/formulario';
 import Icons from './assets/Components/Icons';

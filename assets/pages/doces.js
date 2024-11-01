@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, FlatList, Image, Modal, TouchableOpacity, Linking } from 'react-native';
 import { data } from '../Components/doceList';
+import { abrirWhatsApp } from "../Components/numero";
 import { styles } from './doces.estilos';
 
 export default function Doces() {
@@ -17,13 +18,6 @@ export default function Doces() {
     setSelectedItem(null);
   };
 
-  const enviarMensagem = (item) => {
-    const telefone = "+5521995040236";
-    const mensagem = `Olá, tenho interesse no ${item.nome} (${item.descricao})`;
-    const url = `whatsapp://send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`;
-
-    Linking.openURL(url).catch(() => alert("O WhatsApp não esta instalado"))
-  }
 
   const renderItem = ({ item }) => {
     return (

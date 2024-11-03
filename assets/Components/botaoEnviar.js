@@ -3,8 +3,13 @@ import { TouchableOpacity, Text, Linking, StyleSheet } from "react-native";
 
 import { WHATSAPP_PHONE } from "@env";
 
-const BotaoEnviar = ( { doceEscolhido, docePersonalizado, numeroPessoas, massaBolo, unidades }) => {
+const BotaoEnviar = ( { doceEscolhido, docePersonalizado, numeroPessoas, massaBolo, unidades, logar, onLoginRequired }) => {
     const criarMensagem = () => {
+        if(!logar){
+            onLoginRequired();
+            return;
+        }
+
         let mensagem = `Olá, eu gostaria de um ${doceEscolhido}`;
 
         if( doceEscolhido === "outroDoce" && docePersonalizado ){

@@ -13,6 +13,17 @@ import { styles } from './assets/pages/home.estilos';
 
 const Tab = createMaterialTopTabNavigator();
 
+import { ClerkProvider } from '@clerk/clerk-expo';
+import * as SecureStore from 'expo-secure-store';
+import { useClerk } from '@clerk/clerk-expo';
+
+import { EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY } from "@env";
+
+
+const frontendApi = EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
+
+
 export default function App() {
   let [fontsLoaded] = useFonts({
     'Lobster': require('./assets/fonts/Lobster-Regular.ttf'),
@@ -25,7 +36,8 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
+    <ClerkProvider frontendApi={frontendApi} tokenCache={SecureStore}>
+      <NavigationContainer>
       <Tab.Navigator
         screenOptions={{
           tabBarStyle: { backgroundColor: '#ff6c50' }, 
@@ -33,11 +45,13 @@ export default function App() {
           tabBarIndicatorStyle: { backgroundColor: '#fff' }, 
         }}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Doces" component={Doces} />
-        <Tab.Screen name="Faça seu pedido" component={Formulario} />
-      </Tab.Navigator>
-    </NavigationContainer>
+          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="Doces" component={Doces} />
+          <Tab.Screen name="Faça seu pedido" component={Formulario} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </ClerkProvider>
+    
   );
 }
 

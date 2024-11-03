@@ -1,10 +1,13 @@
 import React ,{ useState, useEffect } from 'react';
 import {Picker} from '@react-native-picker/picker';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, Modal, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BotaoEnviar from "../Components/botaoEnviar";
 
 import { styles } from "./formulario.estilos";
+
+
+import { useClerk } from '@clerk/clerk-expo';
 
 export default function Formulario() {
   const [doceEscolhido, setDoceEscolhido] = useState("");
@@ -13,6 +16,37 @@ export default function Formulario() {
   const [massaBolo, setMassaBolo] = useState("");
   const [unidades, setUnidades] = useState("");
   const [recheio, setRecheio] = useState("");
+
+  const [logar, setLogar] = useState(false);
+  const [modalVisivel, setModalVisivel] = useState(false);
+
+
+  const handleAbrirModal = () => {
+    if(user){
+      console.log("foi");
+    } else{
+      setModalVisivel(true);
+    }
+  }
+
+  const handleLoginGoogle = async () => {
+    try {
+      await signIn.authenticateWithRedirect({ strategy: 'oauth_google' });
+    } catch (error) {
+      console.error("Erro ao fazer login com Google:", error);
+    }
+  };
+
+  const handleLogout = async () => {
+    await signOut();
+    setLogar(false);
+  };
+
+  useEffect(() => {
+    if (user) {
+      setLogar(true);
+    }
+  }, [user]);
 
   const salvarDados = async () => {
     try{
@@ -116,7 +150,32 @@ export default function Formulario() {
                   numeroPessoas={numeroPessoas}
                   massaBolo={massaBolo}
                   unidades={unidades}
+                  logar={logar}
+                  onLoginRequired={() => setModalVisivel(true)}
                 />
+
+
+<Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisivel}
+        onRequestClose={() => setModalVisivel(false)}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+          <View style={{ width: 300, padding: 20, backgroundColor: 'white', borderRadius: 10 }}>
+            <Text>Por favor, faça login para enviar seu pedido.</Text>
+            <TouchableOpacity onPress={handleLoginGoogle}>
+              <Text style={{ color: 'blue', marginTop: 10 }}>Fazer Login com Google</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setModalVisivel(false)}>
+              <Text style={{ color: 'red', marginTop: 10 }}>Cancelar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      {logar && (
+        <Button title="Sair da conta" onPress={handleLogout} />
+      )}
       </View>
     </View>
   );

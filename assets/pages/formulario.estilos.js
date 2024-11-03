@@ -42,5 +42,11 @@ export const styles = StyleSheet.create({
       fontSize: 18,
       fontFamily: "Roboto",
       padding: 10,
+    },
+    botaoTeste: {
+      marginTop: 10,
+    },
+    texto: {
+      color: "blue"
     }
   });

@@ -1,15 +1,16 @@
+import React from 'react';
+import { render } from '@testing-library/react-native';
+import App from '../App'
 
-function somar(a, b) {
-    return a + b;
-  }
+ttest('renderiza a tela inicial e verifica se as fontes são carregadas', async () => {
+  const { findByText, getByText } = render(<App />);
+
+  const titulo = await findByText('Tia Quero Doce!'); 
+  expect(titulo).toBeTruthy();
+
+
+  const textElement = getByText('Tia Quero Doce!');
+  expect(textElement.props.style).toContainEqual(expect.objectContaining({ fontFamily: 'Roboto' })); 
+
   
-  test('Soma Sucesso', () => {
-    const result = somar(10, 5);
-    expect(result).toEqual(15);
-  });
-  
-  test('Soma Falha', () => {
-    const result = somar(10, 5);
-    expect(result).toEqual(5); 
-  });
-  
+});

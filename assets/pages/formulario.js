@@ -1,13 +1,10 @@
 import React ,{ useState, useEffect } from 'react';
 import {Picker} from '@react-native-picker/picker';
-import { View, Text, TextInput, Modal, TouchableOpacity} from 'react-native';
+import { View, Text, TextInput, ScrollView} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BotaoEnviar from "../Components/botaoEnviar";
 
 import { styles } from "./formulario.estilos";
-
-
-import { useClerk } from '@clerk/clerk-expo';
 
 export default function Formulario() {
   const [doceEscolhido, setDoceEscolhido] = useState("");
@@ -16,43 +13,25 @@ export default function Formulario() {
   const [massaBolo, setMassaBolo] = useState("");
   const [unidades, setUnidades] = useState("");
   const [recheio, setRecheio] = useState("");
+  const [cobertura, setCobertura] = useState("");
+  const [decoracao, setDecoracao] = useState("");
+  const [decoracaoPersonalizada, setDecoracaoPersonalizada] = useState("");
 
-  const [logar, setLogar] = useState(false);
-  const [modalVisivel, setModalVisivel] = useState(false);
-
-
-  const handleAbrirModal = () => {
-    if(user){
-      console.log("foi");
-    } else{
-      setModalVisivel(true);
-    }
-  }
-
-  const handleLoginGoogle = async () => {
-    try {
-      await signIn.authenticateWithRedirect({ strategy: 'oauth_google' });
-    } catch (error) {
-      console.error("Erro ao fazer login com Google:", error);
-    }
-  };
-
-  const handleLogout = async () => {
-    await signOut();
-    setLogar(false);
-  };
-
-  useEffect(() => {
-    if (user) {
-      setLogar(true);
-    }
-  }, [user]);
 
   const salvarDados = async () => {
-    try{
-      await AsyncStorage.setItem("@pedido_doce", JSON.stringify({ doceEscolhido, docePersonalizado, numeroPessoas, massaBolo, unidades}));
-      console.log("dados salvos ");
-    }
+    try {
+      const dados = await AsyncStorage.getItem("@pedido_doce");
+      if (dados !== null) {
+        const { doceEscolhido, docePersonalizado, numeroPessoas, massaBolo, unidades, recheio, cobertura, decoracao } = JSON.parse(dados);
+        setDoceEscolhido(doceEscolhido || "");
+        setDocePersonalizado(docePersonalizado || "");
+        setNumeroPessoas(numeroPessoas || "");
+        setMassaBolo(massaBolo || "");
+        setUnidades(unidades || "");
+        setRecheio(recheio || "");
+        setCobertura(cobertura || "");
+        setDecoracao(decoracao || "");
+      }}
     catch (e) {
       console.log("Erro", e);
     }
@@ -62,12 +41,15 @@ export default function Formulario() {
     try {
       const dados = await AsyncStorage.getItem("@pedido_doce");
       if (dados !== null) {
-        const { doceEscolhido, docePersonalizado, numeroPessoas, massaBolo, unidades } = JSON.parse(dados);
+        const { doceEscolhido, docePersonalizado, numeroPessoas, massaBolo, unidades, recheio,  cobertura, decoracao } = JSON.parse(dados);
         setDoceEscolhido(doceEscolhido);
         setDocePersonalizado(docePersonalizado);
         setNumeroPessoas(numeroPessoas);
         setMassaBolo(massaBolo);
         setUnidades(unidades);
+        setRecheio(recheio);
+        setCobertura(cobertura)
+        setDecoracao(decoracao);
       }
     }
     catch (e) {
@@ -82,9 +64,10 @@ export default function Formulario() {
   useEffect(() => {
     salvarDados();
 
-  }, [doceEscolhido, docePersonalizado, numeroPessoas, massaBolo, unidades]);
+  }, [doceEscolhido, docePersonalizado, numeroPessoas, massaBolo, unidades, recheio, cobertura, decoracao]);
 
   return (
+    <ScrollView contentContainerStyle={{ flexGrow: 1}}>
     <View style={styles.container}>
       <Text style={styles.title}>Faça seu pedido</Text>
 
@@ -144,42 +127,71 @@ export default function Formulario() {
                   </>
                 )}
 
+                {doceEscolhido === "bolo" || doceEscolhido === "cupcake" && (
+                  <>
+                    <Text style={styles.title2}>Infome o recheio que deseja</Text>
+
+                    <Picker selectedValue={recheio} onValueChange={(itemValue) => setRecheio(itemValue)} style={styles.picker}>
+
+                      <Picker.Item label="Brigadeiro" value="brigadeiro" style={styles.item} />
+                      <Picker.Item label="Beijinho" value="beijinho" style={styles.item} />
+                      <Picker.Item label="Doce de leite" value="doce de leite" style={styles.item} />
+                      <Picker.Item label="Nutella" value="nutella" style={styles.item} />
+                      <Picker.Item label="Creme de Baunilha" value="Creme de Baunilha" style={styles.item} />
+
+                    </Picker>
+                  </>
+                )}
+
+                <Text style={styles.title2}>Infome a cobertura que deseja</Text>
+
+
+                <Picker  selectedValue={cobertura} onValueChange={(itemValue) => setCobertura(itemValue)} style={styles.picker}>
+
+                      <Picker.Item label="Chantilly" value="Chantilly" style={styles.item} />
+                      <Picker.Item label="Ganache de Chocolate" value="Ganache de Chocolate" style={styles.item} />
+                      <Picker.Item label="Pasta Americana" value="Pasta Americana" style={styles.item} />
+                      <Picker.Item label="Glacê" value="Glacê" style={styles.item} />
+                      <Picker.Item label="Confeitos coloridos" value="Confeitos coloridos" style={styles.item} />
+
+                </Picker>
+
+                <Text style={styles.title2}>Infome a decoração que deseja</Text>
+
+                <Picker selectedValue={decoracao} onValueChange={(itemValue) => setDecoracao(itemValue)} style={styles.picker}>
+
+                      <Picker.Item label="Top de Aniversário" value="Top de Aniversário" style={styles.item} />
+                      <Picker.Item label="Tema infantil" value="Tema infantil" style={styles.item} />
+                      <Picker.Item label="Decoração com Guloseimas" value="Decoração com Guloseimas" style={styles.item} />
+                      <Picker.Item label="Outro" value="outra decoração" style={styles.item}/>
+                </Picker>
+
+                {decoracao === "outra decoração" && (
+                    <TextInput 
+                      placeholder="Informe a decoração que deseja" 
+                      value={decoracaoPersonalizada} 
+                      onChangeText={setDecoracaoPersonalizada} 
+                      style={styles.TextInput} 
+                    />
+                  )}
+
                 <BotaoEnviar
                   doceEscolhido={doceEscolhido}
                   docePersonalizado={docePersonalizado}
                   numeroPessoas={numeroPessoas}
                   massaBolo={massaBolo}
                   unidades={unidades}
-                  logar={logar}
-                  onLoginRequired={() => setModalVisivel(true)}
+                  recheio={recheio}
+                  decoracao={decoracao}
+                  cobertura={cobertura}
                 />
 
-
-<Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisivel}
-        onRequestClose={() => setModalVisivel(false)}>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.5)' }}>
-          <View style={{ width: 300, padding: 20, backgroundColor: 'white', borderRadius: 10 }}>
-            <Text>Por favor, faça login para enviar seu pedido.</Text>
-            <TouchableOpacity onPress={handleLoginGoogle}>
-              <Text style={{ color: 'blue', marginTop: 10 }}>Fazer Login com Google</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => setModalVisivel(false)}>
-              <Text style={{ color: 'red', marginTop: 10 }}>Cancelar</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-
-      {logar && (
-        <Button title="Sair da conta" onPress={handleLogout} />
-      )}
       </View>
     </View>
+    </ScrollView>
   );
 }
+
 
 
 

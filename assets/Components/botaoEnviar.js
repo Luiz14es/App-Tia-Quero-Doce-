@@ -3,26 +3,31 @@ import { TouchableOpacity, Text, Linking, StyleSheet } from "react-native";
 
 import { WHATSAPP_PHONE } from "@env";
 
-const BotaoEnviar = ( { doceEscolhido, docePersonalizado, numeroPessoas, massaBolo, unidades, logar, onLoginRequired }) => {
+const BotaoEnviar = ( { doceEscolhido, docePersonalizado, numeroPessoas, massaBolo, unidades, recheio, cobertura, 
+    decoracao }) => {
     const criarMensagem = () => {
-        if(!logar){
-            onLoginRequired();
-            return;
-        }
 
-        let mensagem = `Olá, eu gostaria de um ${doceEscolhido}`;
+        let mensagem = `Olá, gostaria de um ${doceEscolhido}`;
 
-        if( doceEscolhido === "outroDoce" && docePersonalizado ){
-            mensagem += ` ${docePersonalizado}`;
+        if (doceEscolhido === "outroDoce" && docePersonalizado) {
+          mensagem += `: ${docePersonalizado}`;
         }
+    
+        if (doceEscolhido === "bolo") {
+          mensagem += ` para ${numeroPessoas} pessoas com massa de ${massaBolo}`;
+        }
+    
+        if (doceEscolhido === "bolo" || doceEscolhido === "cupcake") {
+          mensagem += ` com recheio de ${recheio}`;
+        }
+    
+        if (doceEscolhido === "cupcake") {
+          mensagem += `, ${unidades} unidades de cupcake`;
+        }
+    
+        mensagem += `, com cobertura de ${cobertura} e decoração de ${decoracao}`;
+    
 
-        if( doceEscolhido === "bolo" ) {
-            mensagem += ` para ${numeroPessoas} pessoas com massa de ${massaBolo}`;
-        }
-
-        if( doceEscolhido === "cupcake" ) {
-            mensagem += ` ${unidades} unidades de cupcake`;
-        }
 
         const url = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(mensagem)}`;
         Linking.openURL(url).catch(err => console.log("Erro ao abrir o WhatsApp", err));

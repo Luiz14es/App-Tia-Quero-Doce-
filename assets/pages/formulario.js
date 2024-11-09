@@ -1,58 +1,80 @@
-import React ,{ useState, useEffect } from 'react';
-import {Picker} from '@react-native-picker/picker';
-import { View, Text, TextInput, ScrollView} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useState, useEffect } from "react";
+import { Picker } from "@react-native-picker/picker";
+import { View, Text, TextInput, ScrollView } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import BotaoEnviar from "../Components/botaoEnviar";
 
 import { styles } from "./formulario.estilos";
 
+const options = {
+  doceEscolhido: [
+    { label: "Bolo", value: "bolo" },
+    { label: "Cupcake", value: "cupcake" },
+    { label: "Ovo de Chocolate", value: "ovoDeChocolate" },
+    { label: "Barca de doces", value: "barca" },
+    { label: "Outro", value: "outroDoce" },
+  ],
+  numeroPessoas: [
+    { label: "bolo de 15 cm (10 pessoas)", value: "10" },
+    { label: "bolo de 20 cm (20 pessoas)", value: "20" },
+    { label: "bolo de 25 cm (30 pessoas)", value: "30" },
+    { label: "bolo de 30 cm (40 pessoas)", value: "40" },
+  ],
+  massaBolo: [
+    { label: "Massa branca", value: "massaBranca" },
+    { label: "Massa de chocolate", value: "massaDeChocolate" },
+    { label: "Massa de brigadeiro", value: "massaDeBrigadeiro" },
+  ],
+  unidades: [
+    { label: "6 unidades de cupcake", value: "6" },
+    { label: "12 unidades de cupcake", value: "12" },
+    { label: "18 unidades de cupcake", value: "18" },
+    { label: "24 unidades de cupcake", value: "24" },
+  ],
+  recheio: [
+    { label: "Brigadeiro", value: "brigadeiro" },
+    { label: "Beijinho", value: "beijinho" },
+    { label: "Doce de leite", value: "doce de leite" },
+    { label: "Nutella", value: "nutella" },
+    { label: "Creme de Baunilha", value: "Creme de Baunilha" },
+  ],
+  cobertura: [
+    { label: "Chantilly", value: "Chantilly" },
+    { label: "Ganache de Chocolate", value: "Ganache de Chocolate" },
+    { label: "Pasta Americana", value: "Pasta Americana" },
+    { label: "Glacê", value: "Glacê" },
+    { label: "Confeitos coloridos", value: "Confeitos coloridos" },
+  ],
+  decoracao: [
+    { label: "Top de Aniversário", value: "Top de Aniversário" },
+    { label: "Tema infantil", value: "Tema infantil" },
+    { label: "Decoração com Guloseimas", value: "Decoração com Guloseimas" },
+    { label: "Outro", value: "outra decoração" },
+  ],
+};
+
 export default function Formulario() {
-  const [doceEscolhido, setDoceEscolhido] = useState("");
-  const [docePersonalizado, setDocePersonalizado] = useState("");
-  const [numeroPessoas, setNumeroPessoas] = useState("");
-  const [massaBolo, setMassaBolo] = useState("");
-  const [unidades, setUnidades] = useState("");
-  const [recheio, setRecheio] = useState("");
-  const [cobertura, setCobertura] = useState("");
-  const [decoracao, setDecoracao] = useState("");
-  const [decoracaoPersonalizada, setDecoracaoPersonalizada] = useState("");
+  const [formData, setFormData] = useState({
+    doceEscolhido: "",
+    docePersonalizado: "",
+    numeroPessoas: "",
+    massaBolo: "",
+    unidades: "",
+    recheio: "",
+    cobertura: "",
+    decoracao: "",
+    decoracaoPersonalizada: "",
+  });
 
-
-  const salvarDados = async () => {
-    try {
-      const dados = await AsyncStorage.getItem("@pedido_doce");
-      if (dados !== null) {
-        const { doceEscolhido, docePersonalizado, numeroPessoas, massaBolo, unidades, recheio, cobertura, decoracao } = JSON.parse(dados);
-        setDoceEscolhido(doceEscolhido || "");
-        setDocePersonalizado(docePersonalizado || "");
-        setNumeroPessoas(numeroPessoas || "");
-        setMassaBolo(massaBolo || "");
-        setUnidades(unidades || "");
-        setRecheio(recheio || "");
-        setCobertura(cobertura || "");
-        setDecoracao(decoracao || "");
-      }}
-    catch (e) {
-      console.log("Erro", e);
-    }
+  const handleChange = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const carregarDados = async () => {
     try {
       const dados = await AsyncStorage.getItem("@pedido_doce");
-      if (dados !== null) {
-        const { doceEscolhido, docePersonalizado, numeroPessoas, massaBolo, unidades, recheio,  cobertura, decoracao } = JSON.parse(dados);
-        setDoceEscolhido(doceEscolhido);
-        setDocePersonalizado(docePersonalizado);
-        setNumeroPessoas(numeroPessoas);
-        setMassaBolo(massaBolo);
-        setUnidades(unidades);
-        setRecheio(recheio);
-        setCobertura(cobertura)
-        setDecoracao(decoracao);
-      }
-    }
-    catch (e) {
+      if (dados) setFormData(JSON.parse(dados));
+    } catch (e) {
       console.log("Erro ", e);
     }
   };
@@ -61,137 +83,96 @@ export default function Formulario() {
     carregarDados();
   }, []);
 
+  const salvarDados = async () => {
+    try {
+      await AsyncStorage.setItem("@pedido_doce", JSON.stringify(formData));
+    } catch (e) {
+      console.log("Erro", e);
+    }
+  };
+
   useEffect(() => {
     salvarDados();
+  }, [formData]);
 
-  }, [doceEscolhido, docePersonalizado, numeroPessoas, massaBolo, unidades, recheio, cobertura, decoracao]);
+  const renderPicker = (field, options) => (
+    <Picker
+      selectedValue={formData[field]}
+      onValueChange={(value) => handleChange(field, value)}
+      style={styles.picker}
+    >
+      {options.map(({ label, value }) => (
+        <Picker.Item
+          key={value}
+          label={label}
+          value={value}
+          style={styles.item}
+        />
+      ))}
+    </Picker>
+  );
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1}}>
-    <View style={styles.container}>
-      <Text style={styles.title}>Faça seu pedido</Text>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Faça seu pedido</Text>
 
-      <View style={styles.form}>
+        <View style={styles.form}>
+          <Text style={styles.title2}>Escolha o doce que deseja</Text>
+          {renderPicker("doceEscolhido", options.doceEscolhido)}
 
-        <Text style={styles.title2}>Escolha o doce que deseja</Text>
-        <Picker 
-          selectedValue={doceEscolhido} onValueChange={(itemValue) => setDoceEscolhido(itemValue)}
-          style={styles.picker}>
+          {formData.doceEscolhido === "outroDoce" && (
+            <TextInput
+              placeholder="Informe o doce que deseja"
+              value={formData.docePersonalizado}
+              onChangeText={(text) => handleChange("docePersonalizado", text)}
+              style={styles.TextInput}
+            />
+          )}
 
-            <Picker.Item label="Bolo" value="bolo" style={styles.item}/>
-            <Picker.Item label="Cupcake" value="cupcake" style={styles.item}/>
-            <Picker.Item label="Ovo de Chocolate" value="ovoDeChocolate" style={styles.item}/>
-            <Picker.Item label="Barca de doces" value="barca" style={styles.item}/>
-            <Picker.Item label="Outro" value="outroDoce" style={styles.item}/>
-      
-        </Picker>
+          {formData.doceEscolhido === "bolo" && (
+            <>
+              {renderPicker("numeroPessoas", options.numeroPessoas)}
+              <Text style={styles.title2}>Infome a massa que deseja</Text>
+              {renderPicker("massaBolo", options.massaBolo)}
+            </>
+          )}
 
-        {doceEscolhido === "outroDoce" && (
-                    <TextInput placeholder="Informe o doce que deseja" value={docePersonalizado} onChangeText={setDocePersonalizado} style={styles.TextInput} />
-                )}
+          {formData.doceEscolhido === "cupcake" && (
+            <>
+              <Text style={styles.title2}>Escolha a quantidade</Text>
+              {renderPicker("unidades", options.unidades)}
+            </>
+          )}
 
-                {doceEscolhido === "bolo" && (
-                    <>
+          {(formData.doceEscolhido === "bolo" ||
+            formData.doceEscolhido === "cupcake") && (
+            <>
+              <Text style={styles.title2}>Infome o recheio que deseja</Text>
+              {renderPicker("recheio", options.recheio)}
+            </>
+          )}
 
-                      <Picker selectedValue={numeroPessoas} onValueChange={(itemValue) => setNumeroPessoas(itemValue)} style={styles.picker}>
+          <Text style={styles.title2}>Infome a cobertura que deseja</Text>
+          {renderPicker("cobertura", options.cobertura)}
 
-                        <Picker.Item label="bolo de 15 cm (10 pessoas)" value="10" style={styles.item}/>
-                        <Picker.Item label="bolo de 20 cm (20 pessoas)" value="20" style={styles.item}/>
-                        <Picker.Item label="bolo de 25 cm (30 pessoas)" value="30" style={styles.item}/>
-                        <Picker.Item label="bolo de 30 cm (40 pessoas)" value="40" style={styles.item}/>
+          <Text style={styles.title2}>Infome a decoração que deseja</Text>
+          {renderPicker("decoracao", options.decoracao)}
 
-                      </Picker>
-                      
-                      <Text style={styles.title2}>Infome a massa que deseja</Text>
-                      
-                      <Picker selectedValue={massaBolo} onValueChange={(itemValue) => setMassaBolo(itemValue)} style={styles.picker}>
+          {formData.decoracao === "outra decoração" && (
+            <TextInput
+              placeholder="Informe a decoração que deseja"
+              value={formData.decoracaoPersonalizada}
+              onChangeText={(text) =>
+                handleChange("decoracaoPersonalizada", text)
+              }
+              style={styles.TextInput}
+            />
+          )}
 
-                        <Picker.Item label="Massa branca" value="massaBranca" style={styles.item}/>
-                        <Picker.Item label="Massa de chocolate" value="massaDeChocolate" style={styles.item}/>
-                        <Picker.Item label="Massa de brigadeiro" value="massaDeBrigadeiro" style={styles.item}/>
-
-                      </Picker>
-                    </>
-                )}
-
-                {doceEscolhido === "cupcake" && (
-                  <>
-                    <Picker selectedValue={unidades} onValueChange={(itemValue) => setUnidades(itemValue)} style={styles.picker}>
-
-                      <Picker.Item label="6 unidades de cupcake" value="6" style={styles.item} />
-                      <Picker.Item label="12 unidades de cupcake" value="12" style={styles.item} />
-                      <Picker.Item label="18 unidades de cupcake" value="18" style={styles.item} />
-                      <Picker.Item label="24 unidades de cupcake" value="24" style={styles.item} />
-
-                    </Picker>
-                  </>
-                )}
-
-                {doceEscolhido === "bolo" || doceEscolhido === "cupcake" && (
-                  <>
-                    <Text style={styles.title2}>Infome o recheio que deseja</Text>
-
-                    <Picker selectedValue={recheio} onValueChange={(itemValue) => setRecheio(itemValue)} style={styles.picker}>
-
-                      <Picker.Item label="Brigadeiro" value="brigadeiro" style={styles.item} />
-                      <Picker.Item label="Beijinho" value="beijinho" style={styles.item} />
-                      <Picker.Item label="Doce de leite" value="doce de leite" style={styles.item} />
-                      <Picker.Item label="Nutella" value="nutella" style={styles.item} />
-                      <Picker.Item label="Creme de Baunilha" value="Creme de Baunilha" style={styles.item} />
-
-                    </Picker>
-                  </>
-                )}
-
-                <Text style={styles.title2}>Infome a cobertura que deseja</Text>
-
-
-                <Picker  selectedValue={cobertura} onValueChange={(itemValue) => setCobertura(itemValue)} style={styles.picker}>
-
-                      <Picker.Item label="Chantilly" value="Chantilly" style={styles.item} />
-                      <Picker.Item label="Ganache de Chocolate" value="Ganache de Chocolate" style={styles.item} />
-                      <Picker.Item label="Pasta Americana" value="Pasta Americana" style={styles.item} />
-                      <Picker.Item label="Glacê" value="Glacê" style={styles.item} />
-                      <Picker.Item label="Confeitos coloridos" value="Confeitos coloridos" style={styles.item} />
-
-                </Picker>
-
-                <Text style={styles.title2}>Infome a decoração que deseja</Text>
-
-                <Picker selectedValue={decoracao} onValueChange={(itemValue) => setDecoracao(itemValue)} style={styles.picker}>
-
-                      <Picker.Item label="Top de Aniversário" value="Top de Aniversário" style={styles.item} />
-                      <Picker.Item label="Tema infantil" value="Tema infantil" style={styles.item} />
-                      <Picker.Item label="Decoração com Guloseimas" value="Decoração com Guloseimas" style={styles.item} />
-                      <Picker.Item label="Outro" value="outra decoração" style={styles.item}/>
-                </Picker>
-
-                {decoracao === "outra decoração" && (
-                    <TextInput 
-                      placeholder="Informe a decoração que deseja" 
-                      value={decoracaoPersonalizada} 
-                      onChangeText={setDecoracaoPersonalizada} 
-                      style={styles.TextInput} 
-                    />
-                  )}
-
-                <BotaoEnviar
-                  doceEscolhido={doceEscolhido}
-                  docePersonalizado={docePersonalizado}
-                  numeroPessoas={numeroPessoas}
-                  massaBolo={massaBolo}
-                  unidades={unidades}
-                  recheio={recheio}
-                  decoracao={decoracao}
-                  cobertura={cobertura}
-                />
-
+          <BotaoEnviar {...formData} />
+        </View>
       </View>
-    </View>
     </ScrollView>
   );
 }
-
-
-
-

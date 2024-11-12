@@ -1,9 +1,12 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Text, Image, Animated, Easing, ScrollView, StatusBar } from 'react-native';
+import { View, Text, Image, Animated, Easing, ScrollView, StatusBar, Button } from 'react-native';
 import { styles } from './home.estilos';
 import Icons from '../Components/Icons';
 
+import { useAuth } from '../../AuthContext';
+
 export default function HomeScreen() {
+  const { setIsLoggedIn } = useAuth();
 
     const texto = "Tia Quero Doce é sinônimo de sabor e carinho. Diretamente da zona norte do Rio de Janeiro, nossa confeiteira começou com uma paixão por doces caseiros, conquistando o paladar de quem provava suas criações. Com uma tradição que une afeto e dedicação, ela traz à mesa doces que são mais que sobremesas, são memórias doces que ficam para sempre.";
     const linhas = texto.split(",");
@@ -52,10 +55,9 @@ export default function HomeScreen() {
               ))}
             </View>
             <Icons />
+            <Button title="Logout" onPress={() => setIsLoggedIn(false)} />
           </Animated.View>
         </View>
       </ScrollView>
     );
   }
-  
-  

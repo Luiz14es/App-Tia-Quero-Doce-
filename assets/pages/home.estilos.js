@@ -54,5 +54,9 @@ export const styles = StyleSheet.create({
     },
     icones: {
       margin: 24
+    }, 
+    btn: {
+      marginBottom: 10,
+      color: "#333"
     }
   });

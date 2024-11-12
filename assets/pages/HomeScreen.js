@@ -55,7 +55,7 @@ export default function HomeScreen() {
               ))}
             </View>
             <Icons />
-            <Button title="Logout" onPress={() => setIsLoggedIn(false)} />
+            <Button title="Logout" onPress={() => setIsLoggedIn(false)} style={styles.btn}/>
           </Animated.View>
         </View>
       </ScrollView>

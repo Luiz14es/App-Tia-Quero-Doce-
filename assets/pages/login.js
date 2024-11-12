@@ -17,6 +17,8 @@ const Login = () => {
 
     return (
         <View style={styles.container}>
+            <Text style={styles.title}>Tia Quero Doce!</Text>
+
             <TextInput
                 placeholder="Usuário"
                 value={username}
@@ -40,6 +42,14 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         padding: 16,
+        backgroundColor: '#fef7da',
+    },
+    title: {
+      marginBottom: 24,
+      color: "#ff6c50",
+      fontSize: 50,
+      fontFamily: 'Lobster',
+      alignSelf: "center"  
     },
     input: {
         height: 40,
@@ -47,6 +57,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginBottom: 12,
         paddingHorizontal: 8,
+        backgroundColor: "#fff",
+        color: "#333",
+        fontFamily: 'Roboto'
     },
 });
 

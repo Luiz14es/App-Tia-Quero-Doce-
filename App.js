@@ -4,11 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-import { AuthProvider, useAuth } from './AuthContext';
 import Doces from './assets/pages/doces';
 import Formulario from './assets/pages/formulario';
 import HomeScreen from './assets/pages/HomeScreen';
-import Login from './assets/pages/login';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -30,15 +28,10 @@ function MainTabs() {
 }
 
 function AppNavigator() {
-  const { isLoggedIn } = useAuth();
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {isLoggedIn ? (
-        <Stack.Screen name="MainTabs" component={MainTabs} />
-      ) : (
-        <Stack.Screen name="Login" component={Login} />
-      )}
+      <Stack.Screen name="MainTabs" component={MainTabs} />
     </Stack.Navigator>
   );
 }
@@ -53,10 +46,8 @@ export default function App() {
   if (!fontsLoaded) return null;
 
   return (
-    <AuthProvider>
-      <NavigationContainer>
-        <AppNavigator />
-      </NavigationContainer>
-    </AuthProvider>
+    <NavigationContainer>
+      <AppNavigator />
+    </NavigationContainer>
   );
 }
